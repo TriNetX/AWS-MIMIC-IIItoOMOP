@@ -282,6 +282,7 @@
           "Ec2SubnetId": { "Ref": "SubnetId" },
           "TerminationProtected": false, 
         },
+        "LogUri": "s3://trinetx-mimic-etl/logs",
         "Name": "SparkEMRCluster",
         "JobFlowRole": { "Ref": "EMREC2InstanceProfile" },
           "ServiceRole": {

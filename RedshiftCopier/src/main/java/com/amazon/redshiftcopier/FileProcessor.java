@@ -26,6 +26,7 @@ public class FileProcessor {
     
     public FileProcessor(String table) throws ClassNotFoundException, SQLException 
     {
+        System.err.println("trinetx: FileProcessor table: " + table);
         client = new AmazonS3Client();
         client.setRegion(Region.getRegion(Regions.US_WEST_2));
         
@@ -35,6 +36,7 @@ public class FileProcessor {
 
     public void readFiles() throws IOException, SQLException 
     {
+        System.err.println("trinetx: Getting SQL scripts from S3");
         String query = "";
         S3Object s3object = client.getObject(new GetObjectRequest(bucket, System.getenv("prefix") +"/" + table + ".sql"));
         
@@ -44,11 +46,13 @@ public class FileProcessor {
         query = query.replace("${redshift_arn}", System.getenv("redshift_arn"));
         query = query.replace("${bucket}", System.getenv("bucket"));
         
+        System.err.println("trinetx: Executing RedShift query: " + query);
         statement.execute(query);
     }
 
     public void closeConnection() throws SQLException 
     {
+        System.err.println("trinetx: Closing database connection");
         statement.close();
         connection.close();
     }

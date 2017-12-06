@@ -15,6 +15,7 @@ public class Parser {
 
     public Configuration parse(String bucket, String key) throws IOException 
     {
+        System.err.println("Starting parse with bucket and key");
         S3Object s3object = new AmazonS3Client().getObject(new GetObjectRequest(bucket, key));
         
         return parse(s3object.getObjectContent());
@@ -22,6 +23,7 @@ public class Parser {
     
     public Configuration parse(InputStream resource) throws IOException 
     {
+        System.err.println("Starting parse with InputStream");
         ObjectMapper mapper = new ObjectMapper();
         
         return mapper.readValue(resource, Configuration.class);

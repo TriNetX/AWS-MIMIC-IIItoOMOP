@@ -136,44 +136,14 @@
               , "b"
             ]
           ] },
-        "ClusterSubnetGroupName": "default",
+        "ClusterSubnetGroupName": "dev",
         "ClusterType": "single-node",
         "DBName": "omop",
         "MasterUsername": { "Ref": "Username" },
         "MasterUserPassword": { "Ref": "Password" },
-        "NodeType": "dc1.large",
-        "PubliclyAccessible": true,
+        "NodeType": "dc2.large",
+        "PubliclyAccessible": false,
         "VpcSecurityGroupIds": [ { "Ref": "SecurityGroup" } ]
-      }
-    },
-    "EC2Istance": {
-      "Type": "AWS::EC2::Instance",
-      "Properties": {
-        "ImageId": "ami-f173cc91",
-        "InstanceType": "t2.micro",
-        "IamInstanceProfile": { "Ref": "EC2InstanceProfile" },
-        "NetworkInterfaces": [
-          {
-            "AssociatePublicIpAddress": "true",
-            "SubnetId": { "Ref": "SubnetId" },
-            "DeviceIndex": "0"
-          }
-        ],
-        "UserData": {
-          "Fn::Base64": {
-            "Fn::Join": [
-              "",
-              [
-                "#!/bin/bash \n",
-                "exec > /tmp/part-001.log 2>&1 \n",
-                "aws redshift modify-cluster-iam-roles ",
-                " --cluster-identifier ", { "Ref": "RedshiftCluster" },
-                " --add-iam-roles ", { "Fn::GetAtt": [ "RedshiftRole", "Arn" ] },
-                " --region ", { "Ref": "AWS::Region" }
-              ]
-            ]
-          }
-        }
       }
     }
   }

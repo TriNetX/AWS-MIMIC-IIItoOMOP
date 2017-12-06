@@ -17,6 +17,7 @@ public class Driver {
     
     public String lambda(SNSEvent event, Context context)
     {
+        System.err.println("trinetx: Started RedshiftCopier JAR");
         try
         {   
             List<String> list = new ArrayList<String>();
@@ -24,6 +25,7 @@ public class Driver {
             for(SNSEvent.SNSRecord record : event.getRecords())
             {
                 String table = record.getSNS().getMessage().split(" ")[0];
+                System.err.println("trinetx: Driver: table from SNS: " + table);
                 
                 processor = new FileProcessor(table);
                 processor.readFiles();
@@ -33,8 +35,12 @@ public class Driver {
                 list.add(table);
             }
             
+            System.err.println("trinetx: " + list.toString() + " successfully loaded");
             return list.toString() + " successfully loaded";
         }
-        catch(IOException | ClassNotFoundException | SQLException ex){ return ex.toString(); }
+        catch(IOException | ClassNotFoundException | SQLException ex) {
+          System.err.println("trinetx: Exception: " + ex.toString());
+          return ex.toString(); 
+        }
     }
 }

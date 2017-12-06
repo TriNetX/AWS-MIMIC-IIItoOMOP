@@ -15,16 +15,18 @@ public class Driver
 
     public static void main(String args[]) throws IOException
     {
+        System.err.println("trinetx: Started Spark Batch Processor JAR");
         if(args.length != 3) 
         {
-            System.out.println("[1] Config File Bucket (eg - myBucket)");
-            System.out.println("[2] Config File Key (eg - myKey/config.json)");
-            System.out.println("[3] Stack Name (eg - SparkBatchProcessing)");
+            System.err.println("[1] Config File Bucket (eg - myBucket)");
+            System.err.println("[2] Config File Key (eg - myKey/config.json)");
+            System.err.println("[3] Stack Name (eg - SparkBatchProcessing)");
             System.exit(1);
         }
             
         try 
         {
+            System.err.println("trinetx: Starting Loader");
             Loader loader = new Loader(getCurrentRegion());
             
             loader.load(new Parser().parse(args[0], args[1]));
@@ -35,6 +37,9 @@ public class Driver
             
             loader.teardown(args[2], getCurrentRegion());            
         } 
-        catch (SQLException | ClassNotFoundException ex) { Logger.getLogger(Driver.class.getName()).log(Level.SEVERE, null, ex); }
+        catch (SQLException | ClassNotFoundException ex) {
+          System.err.println("trinetx: Exception: " + ex.toString());
+          Logger.getLogger(Driver.class.getName()).log(Level.SEVERE, null, ex); 
+        }
     }
 }

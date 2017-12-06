@@ -21,13 +21,19 @@ public class RedshiftConnection {
     
     public RedshiftConnection() throws ClassNotFoundException, SQLException
     {
+        System.err.println("trinetx: Building connection to RedShift");
         Class.forName("com.amazon.redshift.jdbc41.Driver");
+        System.err.println("trinetx: Instantiating properties");
         Properties props = new Properties();
 
+        System.err.println("trinetx: Setting username");
         props.setProperty("user", USERNAME);
+        System.err.println("trinetx: Setting password");
         props.setProperty("password", PASSWORD);
         
-        connection = DriverManager.getConnection("jdbc:redshift://" + URL + ":" + PORT + "/" + DB, props);
+        String connectionString = "jdbc:redshift://" + URL + ":" + PORT + "/" + DB;
+        System.err.println("trinetx: Connection string: " + connectionString);
+        connection = DriverManager.getConnection(connectionString, props);
     }
     
     public Connection getConnection() throws ClassNotFoundException, SQLException

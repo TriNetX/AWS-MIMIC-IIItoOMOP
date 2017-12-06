@@ -1,13 +1,13 @@
 {
     "dataSource": "mimic",
-    "destinationBucket": "<your s3 bucket>",
-    "sourceBucket": "<your s3 bucket>",
-    "sqlBucket": "<your s3 bucket>",
+    "destinationBucket": "trinetx-mimic-etl",
+    "sourceBucket": "trinetx-mimic-etl",
+    "sqlBucket": "trinetx-mimic-etl",
     "fileSystem": "s3a",
     "mappings": [
 		{
             "sourceFiles": [
-                "mimic3/patients/person.csv" 
+                "mimic3/patients/patients.csv" 
             ],
             "sqlFile": "transformationSQL/person.sql"
         }
@@ -19,7 +19,7 @@
         },{
             "sourceFiles": [
                 "mimic3/labevents/labevents.csv"
-				, "mimic3/d-labitems/d-labitems.csv"
+				, "mimic3/d_labitems/d_labitems.csv"
             ],
             "sqlFile": "transformationSQL/specimen.sql"
         },{
@@ -34,26 +34,26 @@
             "sqlFile": "transformationSQL/procedure-occurrence.sql"
         },{
             "sourceFiles": [
-				"mimic3/d-labitems/d-labitems.csv",
+				"mimic3/d_labitems/d_labitems.csv",
 				"mimic3/labevents/labevents.csv",
 				"mimic3/icustays/icustays.csv"            
 				],
             "sqlFile": "transformationSQL/measurement.sql"
         },{
             "sourceFiles": [
-				"mimic3/patients/person.csv"            
+				"mimic3/patients/patients.csv"            
 				],
             "sqlFile": "transformationSQL/death.sql"
         },{
             "sourceFiles": [
-				"mimic3/diagnoses-icd/diagnoses-icd.csv"            
+				"mimic3/diagnoses_icd/diagnoses_icd.csv"            
 				],
             "sqlFile": "transformationSQL/condition-occurrence.sql"
         },{
             "sourceFiles": [
-				"mimic3/inputevents-cv/inputevents-cv.csv",
-				"mimic3/inputevents-mv/inputevents-mv.csv",
-				"mimic3/d-items/d-items.csv"            
+				"mimic3/inputevents_cv/inputevents_cv.csv",
+				"mimic3/inputevents_mv/inputevents_mv.csv",
+				"mimic3/d_items/d_items.csv"            
 				],
             "sqlFile": "transformationSQL/drug-exposure.sql"
         },{
