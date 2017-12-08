@@ -29,5 +29,5 @@ from 's3://${bucket}/stage/condition-occurrence.csv'
 credentials 'aws_iam_role=${redshift_arn}'
 gzip
 delimiter ','
-ignoreheader 1;
-
+ignoreheader 1
+maxerror as 250;

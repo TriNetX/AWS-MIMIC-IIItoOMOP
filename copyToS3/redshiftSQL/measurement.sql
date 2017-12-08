@@ -42,4 +42,5 @@ credentials 'aws_iam_role=${redshift_arn}'
 gzip
 dateformat 'auto'
 delimiter ','
-ignoreheader 1;
+ignoreheader 1
+maxerror as 250;

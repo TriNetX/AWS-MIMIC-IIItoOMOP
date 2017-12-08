@@ -19,7 +19,7 @@ select mv.SUBJECT_ID as person_id
 	, date_format(mv.STARTTIME, 'yyyyMMdd') as drug_exposure_start_date 
 	, 0 as drug_type_concept_id 
 	, mv.AMOUNT as effective_drug_dose 
-	, mv.STORETIME as provider_id 
+	, mv.CGID as provider_id 
 	, mv.ICUSTAY_ID as visit_occurrence_id 
 	, regexp_replace(items.LABEL, ',', ';') as drug_source_value 
 	, 0 as drug_source_concept_id 

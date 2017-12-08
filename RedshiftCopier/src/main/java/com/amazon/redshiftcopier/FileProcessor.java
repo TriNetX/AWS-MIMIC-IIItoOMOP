@@ -28,7 +28,7 @@ public class FileProcessor {
     {
         System.err.println("trinetx: FileProcessor table: " + table);
         client = new AmazonS3Client();
-        client.setRegion(Region.getRegion(Regions.US_WEST_2));
+        client.setRegion(Region.getRegion(Regions.US_EAST_1));
         
         connection = new RedshiftConnection().getConnection();
         this.table = table;
